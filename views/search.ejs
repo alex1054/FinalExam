@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="search-box">
+        <input type="text" placeholder="Enter a word" id="word" name="word">
+        <button id="search">Search</button>
+    </div>
+    <div class="result" id="result">
+        <div class="def-word" id="def-word">
+            <%= defWord %>
+        </div>
+    </div>
+    <div class="def" id="def">
+        <%= def %>
+    </div>
+</div>
+<script>
+    const url = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/"
+    const apikey = "fc2a6d52-84b1-49e8-af86-a895011f2698"
+    const result = document.getElementById("result")
+    const btn = document.getElementById("search")
+
+    btn.addEventListener("click", () => {
+        let word = document.getElementById("word").value;
+        
+        fetch(`${url}${word}?key=${apikey}`)
+            .then((res) => res.json())
+            .then((data) => { 
+                console.log(data);
+            });
+    });
+</script>
+
