@@ -9,7 +9,7 @@ schema
 .is().min(8)
 
 router.get('/', (req, res) => {
-    res.render('register', { user: new User() })
+    res.render('register')
 })
 
 router.post('/', async (req, res) => {
@@ -20,12 +20,12 @@ router.post('/', async (req, res) => {
     })
     
     try {
-        schema.validate(password) === true
+        //schema.validate(password).value === true
         const newUser = await user.save()
+        console.log('User created')
         res.redirect('/search')
     } catch {
         res.render('register', {
-            user: user, 
             errorMessage: 'Password must be a minimum of 8 characters.'
         })
     }

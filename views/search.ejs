@@ -10,8 +10,7 @@
         <img id="img" src="">
     </div>
 </div>
-<script>  
-    //const Def = require('../models/definition')
+<script>
     const url = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/"
     const apikey = "fc2a6d52-84b1-49e8-af86-a895011f2698"
     const defword = document.getElementById("def-word")
@@ -22,20 +21,12 @@
     btn.addEventListener("click", () => {
         let word = document.getElementById("word").value;
 
-        // Def.findOne({ word: word }, (err, docs) => {
-        //     if (docs.length) {
-        //         defWord.innerHTML = `<h3>${docs.word}</h3>`
-        //         def.innerHTML = `<h3>Definition: </h3><p>${docs.def}</p>`
-        //         document.getElementById("img").src = docs.imgSrc
-        //     } else {}
-        // })
-
         fetch(`${url}${word}?key=${apikey}`)
             .then((res) => res.json())
             .then((data) => { 
                 console.log(data)
                 defword.innerHTML = `<h2>${data[0].meta.id}</h2>`
-                def.innerHTML = `<h3>Definition: </h3><p>${data[0].shortdef[0]}</p>`
+                def.innerHTML = `<h3>Definition: </h3><p>${data[0].def[0].sseq[0][0][1].dt[0][1]}</p>`
                 ill.innerHTML = 'Illustration: '
                 try {
                     document.getElementById("img").src = `https://www.merriam-webster.com/assets/mw/static/art/dict/${data[0].art.artid}.gif`
